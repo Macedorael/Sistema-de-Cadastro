@@ -7,6 +7,11 @@ function criarUsuario(nome, telefone, email, nascimento) {
     };
 }
 
+function limparFormulario() {
+    document.getElementById('cadastroForm').reset();
+    exibirUsuarios();
+}
+
 function cadastrar() {
     
     let nome = document.getElementById('id_nome').value;
@@ -20,6 +25,7 @@ function cadastrar() {
 
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     alert('Usuário cadastrado com sucesso!');
+    limparFormulario();
 }
 
 document.getElementById('cadastroForm').addEventListener('submit', function(e) {
