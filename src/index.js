@@ -32,3 +32,43 @@ document.getElementById('cadastroForm').addEventListener('submit', function(e) {
     e.preventDefault();
     cadastrar();
 });
+
+function exibirUsuarios() {
+    // Obter a lista de usuários do localStorage
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Construir a tabela 
+    let resultadoHtml = '<table class="table table-striped">';
+    resultadoHtml += `
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Data de Nascimento</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>`;
+    // Adicionar as linhas dos usuários
+    if (usuarios.length > 0) {
+        usuarios.forEach((usuario, index) => {
+            resultadoHtml += `
+                <tr>
+                    <td>${usuario.nome.toUpperCase()}</td>
+                    <td>${usuario.telefone}</td>
+                    <td>${usuario.email}</td>
+                    <td>${usuario.nascimento}</td>
+                    <td><button class="btn btn-danger" onclick="excluirUsuario(${index})">Excluir</button></td>
+                </tr>`;
+        });
+    } else {
+        resultadoHtml += '<tr><td colspan="5">Nenhum usuário cadastrado.</td></tr>';
+    }
+
+    resultadoHtml += '</tbody></table>';
+    // Atualizar o conteúdo do div com a tabela
+    document.getElementById('exibirusuarios').innerHTML = resultadoHtml;
+}
+// Exibir os usuários ao carregar a página
+document.addEventListener('DOMContentLoaded', exibirUsuarios);
