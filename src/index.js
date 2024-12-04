@@ -20,5 +20,9 @@ function cadastrar() {
 
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     alert('Usuário cadastrado com sucesso!');
-
 }
+
+document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    cadastrar();
+});
