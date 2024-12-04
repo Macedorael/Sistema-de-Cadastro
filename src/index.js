@@ -72,3 +72,17 @@ function exibirUsuarios() {
 }
 // Exibir os usuários ao carregar a página
 document.addEventListener('DOMContentLoaded', exibirUsuarios);
+
+function excluirUsuario(index) {
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    let usuario = usuarios[index].nome;
+    var confirmacao = confirm("Tem certeza que deseja excluir "+ usuario.toUpperCase() + " ? " );
+
+    if (confirmacao) {
+        // Remover o usuário do array
+        usuarios.splice(index, 1);
+        // Salvar a lista atualizada no localStorage
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        exibirUsuarios();
+}
+}
